@@ -11,6 +11,7 @@ class ListsController < ApplicationController
 
   def create
     @list = List.new permitted_params
+    @list.user = current_user
 
     if @list.save
       redirect_to list_path(@list)
