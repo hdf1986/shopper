@@ -5,9 +5,7 @@ Rails.application.routes.draw do
     root 'lists#index', as: :authenticated_root
     
     resources :lists, only: [:index, :new, :create, :show] do
-      member do
-        resources :list_items, only: [:create]
-      end
+      resources :list_items, only: [:create, :destroy], as: :items
     end
   end
 

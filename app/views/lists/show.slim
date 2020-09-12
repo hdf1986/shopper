@@ -1,15 +1,16 @@
 = link_to 'Go to lists', lists_path
 h1= @list.name
 ul
-  - @list.list_items.each do |item|
+  - @list.list_items.unchecked.each do |item|
     li
       = item.amount
       | |
       = item.product.id
       | |
       = item.product.name
+      = link_to 'X', list_item_path(@list, item), method: :delete
   li
-    = simple_form_for ListItem.new(list: @list) do |f|
+    = simple_form_for ListItem.new(list: @list), url: list_items_path(@list) do |f|
       = f.input :amount, input_html: { value: 1 }
       = f.input :product
       = f.button :submit

@@ -1,12 +1,21 @@
 class ListItemsController < ApplicationController
+  # TODO: Validate users
+  
   def create
-    @list = List.find(params[:id])
+    @list = List.find(params[:list_id])
 
     if list_item.save
       redirect_to list_path(@list)
     else
       render :new
     end
+  end
+
+  def destroy
+    @list_item = ListItem.find(params[:id])
+    @list_item.update_attributes(checked_at: Time.zone.now)
+    
+    redirect_to list_path(@list_item.list)
   end
 
   private
