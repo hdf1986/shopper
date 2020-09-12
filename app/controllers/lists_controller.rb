@@ -21,7 +21,7 @@ class ListsController < ApplicationController
   end
 
   def show
-    @list = List.find(params[:id])
+    @list = List.where(user: current_user).find(params[:id])
   end
 
   private
