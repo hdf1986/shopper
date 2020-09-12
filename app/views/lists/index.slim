@@ -1,0 +1,5 @@
+= link_to 'New list', new_list_path
+.lists
+  - @lists.each do |list|
+    .list-item
+      h2= list.name
