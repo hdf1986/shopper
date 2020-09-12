@@ -3,8 +3,5 @@ class List < ApplicationRecord
   validates :user, presence: true
 
   belongs_to :user
-
-  def items
-    [1]
-  end
+  has_many :list_items
 end

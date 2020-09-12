@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   authenticated :user do 
     root 'lists#index', as: :authenticated_root
     
-    resources :lists, only: [:index, :new, :create, :show]
+    resources :lists, only: [:index, :new, :create, :show] do
+      member do
+        resources :list_items, only: [:create]
+      end
+    end
   end
 
   unauthenticated :user do

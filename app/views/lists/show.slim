@@ -1,5 +1,15 @@
+= link_to 'Go to lists', lists_path
 h1= @list.name
 ul
-  - @list.items.each do |item|
+  - @list.list_items.each do |item|
     li
-      | 1
+      = item.amount
+      | |
+      = item.product.id
+      | |
+      = item.product.name
+  li
+    = simple_form_for ListItem.new(list: @list) do |f|
+      = f.input :amount, input_html: { value: 1 }
+      = f.input :product
+      = f.button :submit
