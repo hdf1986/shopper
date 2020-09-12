@@ -21,7 +21,7 @@ class ListItemsController < ApplicationController
   private
 
   def list_item
-    @list_item = ListItem.find_or_initialize_by list: @list, product: found_product
+    @list_item = ListItem.find_or_initialize_by list: @list, product: found_product, checked_at: nil
     if @list_item.persisted?
       ListItem.update_counters @list_item.id, amount: permitted_params[:amount].to_i
       @list_item.reload 
