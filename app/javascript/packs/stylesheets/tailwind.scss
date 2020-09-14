@@ -1,0 +1,8 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
+
+.button {
+  @apply bg-blue-500 p-2 text-white rounded-md;
+}

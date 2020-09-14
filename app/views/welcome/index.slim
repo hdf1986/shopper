@@ -1,1 +1,4 @@
-= link_to 'Log in', user_google_oauth2_omniauth_authorize_path
+- unless user_signed_in?
+  .container
+    .items-center.justify-center.w-full.h-screen.flex
+      = link_to 'Log in', user_google_oauth2_omniauth_authorize_path, class: 'button'
