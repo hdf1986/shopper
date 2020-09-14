@@ -4,10 +4,10 @@ class ListItemsController < ApplicationController
   def create
     @list = List.find(params[:list_id])
 
-    if list_item.save
+    if found_product.valid? && list_item.save
       redirect_to list_path(@list)
     else
-      render :new
+      render 'lists/show'
     end
   end
 

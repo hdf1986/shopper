@@ -6,3 +6,7 @@
 .button {
   @apply bg-blue-500 p-2 text-white rounded-md;
 }
+
+.card {
+  @apply bg-white p-4 mb-3 flex justify-between items-center bg-white shadow rounded-lg cursor-move;
+}
