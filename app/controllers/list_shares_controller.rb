@@ -1,11 +1,12 @@
 class ListSharesController < ApplicationController
   def new
-    @list = List.where(user: current_user).find(params[:list_id])
+    @list = List.left_joins(:list_shares).where('list_shares.user_id = :user_id OR lists.user_id = :user_id', user_id: current_user.id).find(params[:list_id])
     @list_share = ListShare.new list: @list
   end
 
   def create
-    @list = List.where(user: current_user).find(params[:list_id])
+    @list = List.left_joins(:list_shares).where('list_shares.user_id = :user_id OR lists.user_id = :user_id', user_id: current_user.id).find(params[:list_id])
+    
     @list_share = ListShare.new permitted_params
     @list_share.list = @list
     # TODO: Validate ownership of the list
