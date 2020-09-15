@@ -22,7 +22,7 @@ class ListsController < ApplicationController
   end
 
   def show
-    @list = List.where(user: current_user).find(params[:id])
+    @list = current_user.lists.or(current_user.shared_lists).find(params[:id])
     @list_share = ListShare.new list: @list
   end
 
