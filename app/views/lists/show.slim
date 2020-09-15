@@ -1,4 +1,7 @@
-h1.text-lg.font-bold= @list.name
+.header.flex.w-100.justify-between.mb-4
+  h1.text-lg.font-bold= @list.name
+  .actions
+    = link_to 'Share', new_list_share_path(@list), class: 'button'
 ul
   li.card
     = simple_form_for ListItem.new(list: @list), url: list_items_path(@list), html: { class: 'flex items-stretch w-full' } do |f|

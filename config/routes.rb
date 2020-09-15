@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     
     resources :lists, only: [:index, :new, :create, :show] do
       resources :list_items, only: [:create, :destroy], as: :items
+      resources :list_shares, only: [:new, :create], as: :shares
     end
   end
 

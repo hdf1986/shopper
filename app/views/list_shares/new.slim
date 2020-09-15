@@ -1,0 +1,6 @@
+| Already shared with 
+- @list.users.each do |user|
+  = user.email
+= simple_form_for @list_share, url: list_shares_path(@list), method: :post do |f|
+  = f.input :user_id, as: :select, collection: User.all.pluck(:email, :id), required: true
+  = f.button :submit

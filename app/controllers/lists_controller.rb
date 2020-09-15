@@ -2,7 +2,8 @@ class ListsController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @lists = List.where(user: current_user)
+    @lists = current_user.lists
+    @shared_lists = current_user.shared_lists
   end
 
   def new
@@ -22,6 +23,7 @@ class ListsController < ApplicationController
 
   def show
     @list = List.where(user: current_user).find(params[:id])
+    @list_share = ListShare.new list: @list
   end
 
   private
