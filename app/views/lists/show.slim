@@ -19,6 +19,8 @@ ul
         = "#{item.amount}x"
         | &nbsp;
         .font-bold= item.product.name
-      .buttons
+      .buttons.flex.flex-column
         = link_to list_item_path(@list, item), method: :delete do
+          .text-red-400.mr-4= render 'icons/trash'
+        = link_to list_item_complete_path(@list, item), method: :delete do
           .text-green-400= render 'icons/check'

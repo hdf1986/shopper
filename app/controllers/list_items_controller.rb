@@ -13,6 +13,13 @@ class ListItemsController < ApplicationController
 
   def destroy
     @list_item = ListItem.find(params[:id])
+    @list_item.destroy
+
+    redirect_to list_path(@list_item.list)
+  end
+
+  def complete
+    @list_item = ListItem.find(params[:item_id])
     @list_item.update_attributes(checked_at: Time.zone.now)
     
     redirect_to list_path(@list_item.list)
