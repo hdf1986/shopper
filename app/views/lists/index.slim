@@ -16,8 +16,6 @@
           = link_to 'See more', list_path(list) , class: 'button'
 .w-100.flex.justify-between
   h2.text-lg.font-bold Shared with me lists
-
-  = link_to 'New list', new_list_path, class: 'button'
 .lists
   - @shared_lists.each do |list|
     .list-item class= 'md:flex shadow-lg mx-6 md:mx-auto my-8 max-w-lg md:max-w-2xl' 
