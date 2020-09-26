@@ -20,4 +20,5 @@ ul
         | &nbsp;
         .font-bold= item.product.name
       .buttons
-        = link_to 'x', list_item_path(@list, item), method: :delete
+        = link_to list_item_path(@list, item), method: :delete do
+          .text-green-400= render 'icons/check'
