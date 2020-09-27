@@ -44,7 +44,9 @@ class ListItemsController < ApplicationController
   def found_product
     @found_product if @found_product
     
-    @found_product = Product.find_or_create_by(name: permitted_params[:product])
+    @found_product = Product.find_or_create_by(name: permitted_params[:product]) do |p|
+      p.user = current_user
+    end
   end
 
   def permitted_params

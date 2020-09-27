@@ -1,0 +1,16 @@
+.w-100.flex.justify-between
+  h2.text-lg.font-bold My products
+
+  = link_to 'New product', new_list_path, class: 'button'
+.lists
+  - @products.each do |product|
+    .list-item class= 'md:flex shadow-lg mx-6 md:mx-auto my-8 max-w-lg md:max-w-2xl' 
+      img class= 'h-full w-full md:w-1/3  object-cover rounded-t-lg md:rounded-r-none md:rounded-l-lg pb-5/6' src= 'https://ik.imagekit.io/q5edmtudmz/FB_IMG_15658659197157667_wOd8n5yFyXI.jpg'
+      div class= 'w-full md:w-2/3 px-4 py-4 bg-white rounded-lg flex flex-col justify-between'
+        div class= 'flex items-center'
+          h2 class= 'text-xl text-gray-800 font-medium mr-auto'
+            = product.name
+        
+        div class="flex items-center justify-end mt-4 top-auto self-end"
+          = product.last_price ? humanized_money_with_symbol(product.last_price) : 'Aun no conocemos su precio'
+        /   = link_to 'See more', product_path(product) , class: 'button'
