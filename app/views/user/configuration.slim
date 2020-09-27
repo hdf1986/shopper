@@ -1,0 +1,11 @@
+.w-100.flex.justify-center
+  form.w-full.card.flex-col.max-w-sm.center method="post" action=user_index_path
+    input name="authenticity_token" value=form_authenticity_token type="hidden"
+    .flex.flex-wrap.-mx-3.mb-6
+      .w-full.px-3.mb-6.md:mb-0 
+        label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2 for="grid-first-name" 
+          | Frecuencia de sugerencias
+        input#grid-first-name.appearance-none.block.w-full.bg-gray-200.text-gray-700.border.border-grey-500.rounded.py-3.px-4.mb-3.leading-tight.focus:outline-none.focus:bg-white placeholder="Frecuencia de sugerencias" type="number" name="user[suggestion_frequency]" value=current_user.suggestion_frequency /
+        / p.text-red-500.text-xs.italic Por favor, completa este campo
+    button.button type="submit"
+      | Guardar cambios
