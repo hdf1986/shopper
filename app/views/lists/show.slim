@@ -10,7 +10,7 @@ ul
 
       = f.button :submit, class: 'w-40 ml-4' 
   - @list.list_items.unchecked.order(id: :desc).each do |item|
-    li.card
+    li.card.list-item data-id=item.id
       .text.flex
         button.flex.items-center.mr-4.rounded.text-gray-600
           svg.fill-current.h-3.w-3 viewbox=("0 0 20 20") xmlns="http://www.w3.org/2000/svg" 
@@ -22,5 +22,32 @@ ul
       .buttons.flex.flex-column
         = link_to list_item_path(@list, item), method: :delete do
           .text-red-400.mr-4= render 'icons/trash'
-        = link_to list_item_complete_path(@list, item), method: :delete do
+        button.mark-as-complete data-list-item-id=item.id data-list-item-amount=item.amount data-list-item-last-product-price=item.last_product_price
           .text-green-400= render 'icons/check'
+button
+#modal-complete-item.modal.micromodal-slide aria-hidden="true" 
+  .modal__overlay data-micromodal-close="" tabindex="-1" 
+    form.modal__container.completion-form aria-labelledby="modal-1-title" aria-modal="true" role="dialog" 
+      header.modal__header
+        h2#modal-1-title.modal__title
+          | ¿Cuanto pagaste por cada unidad?
+        button.modal__close aria-label=("Close modal") data-micromodal-close="" 
+      main#modal-1-content.modal__content
+        .w-full.max-w-lg
+          input type='hidden' name='list_item[id]'
+          .flex.flex-wrap.-mx-3.mb-6
+            .w-full.px-3.mb-6.md:mb-0 class="md:w-1/2" 
+              label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2 for="grid-first-name" 
+                | Precio
+              input#grid-first-name.appearance-none.block.w-full.bg-gray-200.text-gray-700.border.border-grey-500.rounded.py-3.px-4.mb-3.leading-tight.focus:outline-none.focus:bg-white placeholder="Precio unitario" type="number" step=0.01 name="list_item[product_price]"/
+              / p.text-red-500.text-xs.italic Por favor, completa este campo
+            .w-full.px-3 class="md:w-1/2" 
+              label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2 for="grid-last-name" 
+                | Cantidad
+              input#grid-last-name.appearance-none.block.w-full.bg-gray-200.text-gray-700.border.border-gray-200.rounded.py-3.px-4.leading-tight.focus:outline-none.focus:bg-white.focus:border-gray-500 placeholder="Cantidad" type="number" name="list_item[amount]" /
+          
+           
+      footer.modal__footer.flex.justify-between
+        button.modal__btn aria-label=("Close this dialog window") data-micromodal-close=""  Cancelar
+        button.modal__btn.modal__btn-primary type="submit" Continuar
+

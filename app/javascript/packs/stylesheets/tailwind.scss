@@ -2,6 +2,7 @@
 @import "tailwindcss/components";
 
 @import "tailwindcss/utilities";
+@import "./modal.scss";
 
 .button {
   @apply bg-blue-500 p-2 text-white rounded-md;

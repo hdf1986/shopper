@@ -7,6 +7,8 @@ class ListItemsController < ApplicationController
     if found_product.valid? && list_item.save
       redirect_to list_path(@list)
     else
+      binding.pry
+      Rails.logger.info list_item.errors.details
       render 'lists/show'
     end
   end
