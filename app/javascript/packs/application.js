@@ -19,47 +19,44 @@ import "./stylesheets/tailwind"
 
 import MicroModal from 'micromodal';
 
-document.addEventListener('readystatechange', function(event) {
-  if (document.readyState === "complete") {
+document.addEventListener('turbolinks:load', function() {
+  (function () {
+    const markAsCompleteElements = document.querySelectorAll('.mark-as-complete')
 
-    (function () {
-      const markAsCompleteElements = document.querySelectorAll('.mark-as-complete')
-
-      const completionForm = document.querySelector('.completion-form')
-      const listItemId = document.querySelector('.completion-form [name=\'list_item[id]\']')
-      const listItemProductPrice = document.querySelector('.completion-form [name=\'list_item[product_price]\']')
-      const listItemAmount = document.querySelector('.completion-form [name=\'list_item[amount]\']')
-      
-      const submitForm = e => {
-        e.preventDefault()
-        fetch(`/api/v1/list_items/${listItemId.value}/complete`, {
-          body: JSON.stringify({
-            list_item: {
-              product_price: listItemProductPrice.value,
-              final_amount: listItemAmount.value
-            }
-          }),
-          method: 'POST',
-          headers: {
-            "Content-Type": "application/json"
+    const completionForm = document.querySelector('.completion-form')
+    const listItemId = document.querySelector('.completion-form [name=\'list_item[id]\']')
+    const listItemProductPrice = document.querySelector('.completion-form [name=\'list_item[product_price]\']')
+    const listItemAmount = document.querySelector('.completion-form [name=\'list_item[amount]\']')
+    
+    const submitForm = e => {
+      e.preventDefault()
+      fetch(`/api/v1/list_items/${listItemId.value}/complete`, {
+        body: JSON.stringify({
+          list_item: {
+            product_price: listItemProductPrice.value,
+            final_amount: listItemAmount.value
           }
-        }).then(() => {
-          MicroModal.close('modal-complete-item');
-          const listItemCard = document.querySelector(`.list-item[data-id='${listItemId.value}']`)
-          listItemCard.parentNode.removeChild(listItemCard)
-        })
-      }
+        }),
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).then(() => {
+        MicroModal.close('modal-complete-item');
+        const listItemCard = document.querySelector(`.list-item[data-id='${listItemId.value}']`)
+        listItemCard.parentNode.removeChild(listItemCard)
+      })
+    }
 
-      const openMarkAsCompletedModal = element => e => {
-        e.preventDefault()
-        listItemId.value = element.dataset.listItemId
-        listItemAmount.value = element.dataset.listItemAmount
-        listItemProductPrice.value = parseFloat(element.dataset.listItemLastProductPrice)
-        MicroModal.show('modal-complete-item');
-      }
-      
-      markAsCompleteElements.forEach(element => element.addEventListener('click', openMarkAsCompletedModal(element)))
-      completionForm.addEventListener('submit', submitForm)
-    })()
-  }
+    const openMarkAsCompletedModal = element => e => {
+      e.preventDefault()
+      listItemId.value = element.dataset.listItemId
+      listItemAmount.value = element.dataset.listItemAmount
+      listItemProductPrice.value = parseFloat(element.dataset.listItemLastProductPrice)
+      MicroModal.show('modal-complete-item');
+    }
+    
+    markAsCompleteElements.forEach(element => element.addEventListener('click', openMarkAsCompletedModal(element)))
+    completionForm.addEventListener('submit', submitForm)
+  })()
 });
