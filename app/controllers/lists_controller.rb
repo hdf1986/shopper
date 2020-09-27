@@ -2,8 +2,8 @@ class ListsController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @lists = current_user.lists
-    @shared_lists = current_user.shared_lists
+    @lists = current_user.lists.not_archived
+    @shared_lists = current_user.shared_lists.not_archived
   end
 
   def new
@@ -19,6 +19,14 @@ class ListsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def destroy
+    @list = List.find params.require(:id)
+
+    @list.update archived_at: Time.zone.now
+
+    redirect_to lists_path
   end
 
   def show

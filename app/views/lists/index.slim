@@ -11,6 +11,8 @@
           h2 class= 'text-xl text-gray-800 font-medium mr-auto'
             = link_to list_path(list) do 
               h2= list.name
+          = link_to list_path(list), method: :delete do
+            = render 'icons/trash'
         
         div class="flex items-center justify-end mt-4 top-auto self-end"
           = link_to 'See more', list_path(list) , class: 'button'

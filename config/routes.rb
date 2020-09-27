@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     root 'lists#index', as: :authenticated_root
   end
   
-  resources :lists, only: [:index, :new, :create, :show] do
+  resources :lists, only: [:index, :new, :create, :show, :destroy] do
     resources :list_items, only: [:create, :destroy], as: :items do
       delete :complete
     end
